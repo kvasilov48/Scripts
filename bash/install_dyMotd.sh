@@ -11,9 +11,9 @@ nano /etc/init.d/bootlogs
 ##uname -snrvm > /var/run/motd
 ##[ -f /etc/motd.tail ] && cat /etc/motd.tail >> /var/run/motd
 
-wget https://github.com/iptoux/dyMotd/tarball/master
+git clone https://github.com/iptoux/dyMotd
 mkdir /etc/srvtls/motd 
-tar xf iptoux-dyMotd-6348e8d.tar.tar
+cd dyMOtd/files
 
 #If /etc/srvtls dosn't exists, create it, to get archivname type ls in console.
 mv .config /etc/srvtls/motd/.config
