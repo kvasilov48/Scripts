@@ -12,10 +12,4 @@ function p24_balance($id, $pass, $cardnum, $country="UA"){
 	$result = simplexml_load_string($result);
 	return $result;
 }
-
-//$id = "0000000";
-//$pass = "0000000000000000000000000";
-//$cardnum = "0000000000000000";
-//$a = p24_balance($id, $pass, $cardnum);
-//print_r($a);
 ?>
