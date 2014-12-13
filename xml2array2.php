@@ -1,3 +1,4 @@
+<?php
 class XmlToArray
 {
     var $xml='';
@@ -63,3 +64,4 @@ class XmlToArray
 //$data = file_get_contents('sample.xml');
 //$xmlObj= new XmlToArray($data);
 //$arrayData = $xmlObj->createArray();
+?>
