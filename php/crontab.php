@@ -21,7 +21,6 @@
 	 * $crontab->destroyFilePoint(); // OPTIONAL
 	 */
 	  class crontab{
-		
 		var $minute=NULL;
 		var $hour=NULL;
 		var $day=NULL;
@@ -32,7 +31,6 @@
 		var $filename="crons";
 		var $crontabPath=NULL;
 		var $handle=NULL;
-		
 		/**
 		 *	Constructor. Attempts to create directory for
 		 *	holding cron jobs
@@ -52,9 +50,6 @@
 				exit('File error');
 			$this->pathToCrontab=($crontabPath) ? NULL : $crontabPath;
 		}
-		
-		
-
 		/**
 		 *	Set date parameters
 		 *
@@ -82,14 +77,12 @@
 		 *	$access	public
 		 */
 		function setDateParams($min=NULL, $hour=NULL, $day=NULL, $month=NULL, $dayofweek=NULL){
-			
 			if($min=="0")
 				$this->minute=0;
 			elseif($min)
 				$this->minute=$min;
 			else
 				$this->minute="*";
-			
 			if($hour=="0")
 				$this->hour=0;
 			elseif($hour)
@@ -99,9 +92,7 @@
 			$this->month=($month) ? $month : "*";
 			$this->day=($day) ? $day : "*";
 			$this->dayofweek=($dayofweek) ? $dayofweek : "*";
-			
 		}
-		
 		/**
 		 *	Set the directory path. Will check it if it exists then
 		 *	try to open it. Also if it doesn't exist then it will try to
@@ -114,7 +105,6 @@
 		 */
 		function setDirectory($directory){
 			if(!$directory) return false;
-			
 			if(is_dir($directory)){
 				if($dh=opendir($directory)){
 					$this->directory=$directory;
@@ -129,8 +119,6 @@
 			}
 			return false;
 		}
-		
-		
 		/**
 		 *	Create cron file
 		 *
@@ -148,7 +136,6 @@
 		function createCronFile($filename=NULL){
 			if(!$filename)
 				return false;
-			
 			if(file_exists($this->directory.$filename)){
 				if($handle=fopen($this->directory.$filename, 'a')){
 					$this->handle=&$handle;
@@ -157,7 +144,6 @@
 				}else
 					return false;
 			}
-			
 			if(!$handle=fopen($this->directory.$filename, 'a'))
 				return false;
 			else{
@@ -166,8 +152,6 @@
 				return true;
 			}
 		}
-		
-		
 		/**
 		 *	Set command to execute
 		 *
@@ -183,9 +167,6 @@
 			}else
 				return false;
 		}
-		
-		
-		
 		/**
 		 *	Write cron command to file. Make sure you used createCronFile
 		 *	before using this function of it will return false
@@ -201,10 +182,6 @@
 			else
 				return false;
 		}
-		
-		
-		
-		
 		/**
 		 *	Save cron in system
 		 *
@@ -222,8 +199,6 @@
 			else
 				return false;
 		}
-		
-		
 		/**
 		 *	Destroy file pointer
 		 *
@@ -235,9 +210,5 @@
 			fclose($this->handle);
 			return true;
 		}
-		
-		
-		
 	}
-		
 ?>
