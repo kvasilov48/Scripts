@@ -1,0 +1,182 @@
+<html>
+<head>
+  <title>jQuery Calculator</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<body>
+<STYLE>
+.calc { 
+ margin: 10px auto; 
+ padding: 5px; 
+ width: 177px; 
+ border: 1px solid #222; 
+ border-radius: 4px; 
+ background-color: #3d4543; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3d4543), color-stop(100%, #2f2a2f)); 
+ background-image: -webkit-linear-gradient(top, #3d4543, #2f2a2f); 
+ background-image: -moz-linear-gradient(top, #3d4543, #2f2a2f); 
+ background-image: -ms-linear-gradient(top, #3d4543, #2f2a2f); 
+ background-image: -o-linear-gradient(top, #3d4543, #2f2a2f); 
+ background-image: linear-gradient(top, #3d4543, #2f2a2f); 
+ -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5); 
+ box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 4px rgba(0, 0, 0, 0.5); 
+} 
+.calc-display { 
+ margin: 0 0 20px; 
+ padding: 3px; 
+ background: #222; 
+ border-radius: 3px; 
+ -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08); 
+ box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.08); 
+} 
+.calc-display-input { 
+ display: block; 
+ width: 100%; 
+ padding: 0 8px; 
+ font: 26px/35px UbuntuMono, monospace; 
+ color: #444; 
+ height: 35px; 
+ text-align: right; 
+ background-clip: padding-box; 
+ /* Don't let the background bleed outside the border */ 
+ border: 1px solid #222; 
+ border-radius: 2px; 
+ background-color: #bccd95; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bccd95), color-stop(100%, #e0f5b1)); 
+ background-image: -webkit-linear-gradient(top, #bccd95, #e0f5b1); 
+ background-image: -moz-linear-gradient(top, #bccd95, #e0f5b1); 
+ background-image: -ms-linear-gradient(top, #bccd95, #e0f5b1); 
+ background-image: -o-linear-gradient(top, #bccd95, #e0f5b1); 
+ background-image: linear-gradient(top, #bccd95, #e0f5b1); 
+ -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12); 
+ box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12); 
+} 
+.calc-row { 
+ margin-top: 7px; 
+ zoom: 1; 
+} 
+.calc-row:before, .calc-row:after { 
+ content: ""; 
+ display: table; 
+} 
+.calc-row:after { 
+ clear: both; 
+} 
+.calc-button { 
+ float: left; 
+ padding: 0; 
+ margin: 0 0 0 7px; 
+ width: 39px; 
+ font: 14px/23px UbuntuMono, monospace; 
+ color: white; 
+ text-align: center; 
+ text-shadow: 0 1px rgba(0, 0, 0, 0.4); 
+ text-decoration: none; 
+ background-clip: padding-box !important; 
+ /* !important because FF overrides the value on :active */ 
+ border: 0; 
+ /* IE 8 fix */ 
+ border: 1px solid rgba(0, 0, 0, 0.8); 
+ border-radius: 3px; 
+ cursor: pointer; 
+ background-color: #313131; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #313131), color-stop(100%, #1c1c1c)); 
+ background-image: -webkit-linear-gradient(top, #313131, #1c1c1c); 
+ background-image: -moz-linear-gradient(top, #313131, #1c1c1c); 
+ background-image: -ms-linear-gradient(top, #313131, #1c1c1c); 
+ background-image: -o-linear-gradient(top, #313131, #1c1c1c); 
+ background-image: linear-gradient(top, #313131, #1c1c1c); 
+ -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08); 
+ box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08); 
+} 
+.calc-button:first-child { 
+ margin-left: 0; 
+} 
+.calc-button:active { 
+ background: #282828; 
+ -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05); 
+ box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05); 
+}
+.calc-button-gray { 
+ background-color: #6f6f6f; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6f6f6f), color-stop(100%, #515151)); 
+ background-image: -webkit-linear-gradient(top, #6f6f6f, #515151); 
+ background-image: -moz-linear-gradient(top, #6f6f6f, #515151); 
+ background-image: -ms-linear-gradient(top, #6f6f6f, #515151); 
+ background-image: -o-linear-gradient(top, #6f6f6f, #515151); 
+ background-image: linear-gradient(top, #6f6f6f, #515151); 
+} 
+.calc-button-gray:active { 
+ background: #555; 
+} 
+.calc-button-red { 
+ background-color: #ff4561; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff7286), color-stop(100%, #ff4561)); 
+ background-image: -webkit-linear-gradient(top, #ff7286, #ff4561); 
+ background-image: -moz-linear-gradient(top, #ff7286, #ff4561); 
+ background-image: -ms-linear-gradient(top, #ff7286, #ff4561); 
+ background-image: -o-linear-gradient(top, #ff7286, #ff4561); 
+ background-image: linear-gradient(top, #ff7286, #ff4561); 
+} 
+.calc-button-red:active { 
+ background: #ff4561; 
+} 
+.calc-button-yellow { 
+ background-color: #ffa70c; 
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffb935), color-stop(100%, #ffa70c)); 
+ background-image: -webkit-linear-gradient(top, #ffb935, #ffa70c); 
+ background-image: -moz-linear-gradient(top, #ffb935, #ffa70c); 
+ background-image: -ms-linear-gradient(top, #ffb935, #ffa70c); 
+ background-image: -o-linear-gradient(top, #ffb935, #ffa70c); 
+ background-image: linear-gradient(top, #ffb935, #ffa70c); 
+} 
+.calc-button-yellow:active { 
+ background: #ffa70c; 
+} 
+.calc-button-big { 
+ font-size: 16px; 
+}
+</STYLE>
+<SCRIPT> 
+ function s(v) { document.getElementById('res').value = v } 
+ function a(v) { document.getElementById('res').value += v } 
+ function e() { try { s(eval(document.getElementById('res').value)) } catch(e) { s('Error') } } 
+ </SCRIPT>
+<form class="calc"> 
+ <p class="calc-display"> 
+ <input type="text" name="res" id="res" value="1234.5678" class="calc-display-input" onfocus="this.blur()"> 
+ </p> 
+ <p class="calc-row"> 
+ <button type="button" class="calc-button calc-button-gray" onclick="s('Just....')">mrc</button> 
+ <button type="button" class="calc-button calc-button-gray" onclick="s('....do..')">m-</button> 
+ <button type="button" class="calc-button calc-button-gray" onclick="s('......it')">m+</button> 
+ <button type="button" class="calc-button calc-button-red calc-button-big" onclick="a('/')">?</button> 
+ </p> 
+ <p class="calc-row"> 
+ <button type="button" class="calc-button" onclick="a('7')">7</button> 
+ <button type="button" class="calc-button" onclick="a('8')">8</button> 
+ <button type="button" class="calc-button" onclick="a('9')">9</button> 
+ <button type="button" class="calc-button calc-button-red calc-button-big" onclick="a('*')">x</button> 
+ </p> 
+ <p class="calc-row"> 
+ <button type="button" class="calc-button" onclick="a('4')">4</button> 
+ <button type="button" class="calc-button" onclick="a('5')">5</button> 
+ <button type="button" class="calc-button" onclick="a('6')">6</button> 
+ <button type="button" class="calc-button calc-button-red calc-button-big" onclick="a('-')">-</button> 
+ </p> 
+ <p class="calc-row"> 
+ <button type="button" class="calc-button" onclick="a('1')">1</button> 
+ <button type="button" class="calc-button" onclick="a('2')">2</button> 
+ <button type="button" class="calc-button" onclick="a('3')">3</button> 
+ <button type="button" class="calc-button calc-button-red calc-button-big" onclick="a('+')">+</button> 
+ </p> 
+ <p class="calc-row"> 
+ <button type="button" class="calc-button" onclick="a('0')">0</button> 
+ <button type="button" class="calc-button" onclick="a('.')">.</button> 
+ <button type="button" class="calc-button" onclick="s('')">C</button> 
+ <button type="button" class="calc-button calc-button-yellow calc-button-big" onclick="e()">=</button> 
+ </p> 
+ </form>
+</body>
+</html>
