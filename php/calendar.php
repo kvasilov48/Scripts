@@ -66,4 +66,24 @@ while($day_count >1 && $day_count <=7){
 echo "</tr></table></div>";
 }
 //calendar();
+/*
+/* CALENDAR WIDGET 
+aside .side-calendar{padding:0}
+.calendar{width:100%}
+.side-calendar td{
+	font-family: Courier New;
+	font-size:11px;
+	font-weight:bold;
+	height:20px;
+    color:#c7c7c7;
+	text-align:center;
+	border:1px solid #292929;
+}
+.side-calendar .time td{font-size:30px;height:25px;}
+.side-calendar .day-names td, .side-calendar .title td{color:#FFA206}
+.side-calendar .today{
+	color:#FFA206;
+	background:rgba(0,0,0,.35)!important;
+}
+*/
 ?>
