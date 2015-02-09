@@ -51,6 +51,17 @@ make
 make install
 make distclean
 
+# apt-get install libopus-dev
+# or
+cd ~/ffmpeg_sources
+wget http://downloads.xiph.org/releases/opus/opus-1.1.tar.gz
+tar xzvf opus-1.1.tar.gz
+cd opus-1.1
+./configure --prefix="$HOME/ffmpeg_build" --disable-shared
+make
+make install
+make distclean
+
 # Google codec
 cd ~/ffmpeg_sources
 wget http://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2
