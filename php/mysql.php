@@ -2,7 +2,7 @@
 
 # v. 1.40 (2.03.2014)
 # http://webew.ru/articles/3237.webew
-
+# $mysqli = mysqli_connect(...); // можно и объектный синтаксис - не важно
 function mysql_q($sql, $substitutions = array()) {
 	
 	global $mysqli;
